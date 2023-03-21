@@ -1,0 +1,5 @@
+## March 20th, 2023:
+On the current day, our team had acquired a GitLab repository and commenced collaboration towards designing our application. Through active discussion and analysis, we were able to refine our initial concepts and converge towards a single Minimum Viable Product (MVP), while also outlining our desired future goals. During this process, we completed our team's code of conduct, while also establishing a clear vision for the appearance and functionality of a simple profile page utilizing the standard Create, Read, Update, Delete (CRUD) operations.
+
+## March 21th, 2023:
+Our daily routine commenced with a standup meeting, wherein each team member articulated their previous day's accomplishments and delineated their aspirations for the collective progression. Subsequently, we delved into the intricate process of wireframing, meticulously crafting the visual blueprint of our frontend interface. To further augment our development endeavors, we deliberated over the selection of a fitting data platform, such as SQL or MongoDB, with plans to reconvene the following day to finalize our well-informed decision.
