@@ -1,0 +1,2 @@
+## March 20th, 2023:
+Today we got our gitlab repository and collaborated on ideas for our application. We narrowed down our ideas to a single MVP and have outlined future stretch goals. We focused on our code of conduct and what a simple profile page will look like with CRUD.
