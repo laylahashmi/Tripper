@@ -9,3 +9,6 @@ We completed our wireframe today and made a few changes. The team wanted to add 
 
 ## March 23rd, 2023:
 The majority of our day was spent on lectures about SQL and completing our resume drafts. The team decided to take notes on our API endpoints to begin writing them out tomorrow.
+
+## March 24th, 2023:
+We decided to stick with our decision with using the Mongo Database after today's lecture on MongoDB. We worked together to complete the api-design and updated our wireframe to include a home page for users who are not logged-in/signed-up. For this weekend we discussed reviewing the new material and writing our first issue.
