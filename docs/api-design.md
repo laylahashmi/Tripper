@@ -30,6 +30,8 @@
   true
   ```
 
+<!-- add get token request --> TODO
+
 ### Sign Up
 * Endpoint path: /api/accounts
 * Endpoint method: POST
@@ -51,7 +53,7 @@
   }
   ```
 
-### Delete account
+<!-- ### Delete account
 * Endpoint path: /api/accounts/{account_id}
 * Endpoint method: DELETE
 * Query parameters:
@@ -72,7 +74,7 @@
     true
     "message": str,
   }
-  ```
+  ``` -->
 
 ### Create trip
 * Endpoint path: /api/trips
@@ -83,17 +85,22 @@
 
 * Request shape (JSON):
   ```json
-    "trip_name": str,
+    "name": str,
     "picture_url": str,
     "start_date": date,
     "end_date": date,
-    "journal_entry": str,
+    "journal_entry(description)": str,
   ```
 
 * Response: A trip gets created
 * Response shape (JSON):
-  ```json
-    "message": str,
+ ```json
+    "name": str,
+    "picture_url": str,
+    "start_date": date,
+    "end_date": date,
+    "journal_entry(description)": str,
+    "id": str
   ```
 
 ### Read/list all trips
@@ -105,8 +112,9 @@
 
 * Response: Get a list of trips
 * Response shape (JSON):
-  ```json {
-    "trip": {
+  ```json 
+  {
+    "trips": [{
     "trip_id": str,
     "trip_name": str,
     "start_date": date,
@@ -121,11 +129,12 @@
         "city": str,
         "journal_entry": str,
     },
-    ]}
+    ]}]
   }
   ```
 
 ### Read/Get a specific trip
+<!-- maybe just put the name of the city for the carousel stop cards rather than listing all information -->
 * Endpoint path: /api/trips/{trip_id}
 * Endpoint method: GET
 * Query parameters:
@@ -136,7 +145,8 @@
 
 * Response: Trip information is listed
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     "trip": {
     "trip_id": str,
     "trip_name": str,
@@ -188,7 +198,8 @@
   * Authorization: Bearer token
 
 * Request shape (JSON):
-  ```json {
+  ```json 
+  {
       "trip_name": str,
       "start_date": date,
       "end_date": date,
@@ -218,25 +229,28 @@
   * Authorization: Bearer token
 
 * Request shape (JSON):
-  ```json {
-      "stop_name": str,
+  ```json 
+  {
+      "name": str,
       "street": str,
       "state": str,
       "city": str,
-      "journal_entry": str,
+      "journal_entry(description)": str,
       /* pexels entry? */
     }
   ```
 
 * Response: Stop created
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     "stop_name": str,
     "street": str,
     "state": str,
     "city": str,
     "journal_entry": str,
-    /* pexels entry? /*
+    "id": str
+    /* pexels entry? */
   }
   ```
 
@@ -272,7 +286,8 @@
   * Authorization: Bearer token
 
 * Request shape (JSON):
-  ```json {
+  ```json 
+  {
       "stop_name": str,
       "street": str,
       "state": str,
@@ -284,12 +299,14 @@
 
 * Response: Updated stop info
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     "stop_name": str,
     "street": str,
     "state": str,
     "city": str,
     "journal_entry": str,
+    "id": str
     /* pexels entry? */
   }
   ```
@@ -311,8 +328,10 @@
 
 * Response: always true
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     true,
+    |
     "message": str,
   }
   ```
