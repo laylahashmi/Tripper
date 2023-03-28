@@ -1,13 +1,30 @@
-# volumes:
+volumes:
+  mongo-data:
+    external: true
 services:
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
   fastapi:
     build:
-      context: sample_service
+      context: My_Travel_Journal
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
+      - ./My_Travel_Journal:/app
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_HOSTS: mongo:27017
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
+      MONGO_URL: mongodb://admin:password@mongo
       
   ghi:
     image: node:lts-bullseye
