@@ -6,11 +6,19 @@ services:
     image: mongo:6
     volumes:
       - mongo-data:/data/db
+<<<<<<< HEAD
     ports:
       - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+=======
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 27017:27017
+>>>>>>> edfe790 (march27 and march28 journal)
   fastapi:
     build:
       context: My_Travel_Journal
@@ -18,12 +26,17 @@ services:
     ports:
       - 8000:8000
     volumes:
+<<<<<<< HEAD
       - ./My_Travel_Journal:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       WAIT_HOSTS: mongo:27017
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
+=======
+      - ./sample_service:/app
+    environment:
+>>>>>>> edfe790 (march27 and march28 journal)
       MONGO_URL: mongodb://admin:password@mongo
       
   ghi:
@@ -33,7 +46,7 @@ services:
     volumes:
       - ./ghi:/app
     ports:
-      - "3000:3000"
+      - 3000:3000
     environment:
       HOST_OS: ${OS}
       NODE_ENV: development
