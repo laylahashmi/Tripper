@@ -18,3 +18,6 @@ Today we focused on learning authentication and setting up our database. We're l
 
 ## March 28th, 2023:
 As a group we were able to complete setting up our database and are currently working on authentication with a few blockers. Our goal tomorrow is to start adding to our database along with the signup, login, logout page and to get our authentication working. We downloaded mongocompass and were able to add our new database as a connection.
+
+## March 29th, 2023:
+We collaborated on our endpoints for trips and walked through the code as a team. We're looking to get the rest of our endpoints done tomorrow with trips and stops.
