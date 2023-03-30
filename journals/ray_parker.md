@@ -21,3 +21,6 @@ As a group we were able to complete setting up our database and are currently wo
 
 ## March 29th, 2023:
 We collaborated on our endpoints for trips and walked through the code as a team. We're looking to get the rest of our endpoints done tomorrow with trips and stops.
+
+## March 30th, 2023:
+Working on our back end has brought up a few blockers especially with incorporating our stops. The biggest blocker was grabbing and viewing an id for a stop. We started using VScode live share to code together and that has been helpful. All we need to do is wrap up our back end to get a stop and update a stop which we'll continue on Monday. For this weekend we discussed reviewing the FastAPI videos to gain a better understanding of our code before moving into the front end.
