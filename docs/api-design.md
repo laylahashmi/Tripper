@@ -37,7 +37,8 @@
 * Endpoint method: POST
 
 * Request shape (JSON):
-  ```json {
+  ```json 
+  {
       "first_name": str,
       "last_name": str,
       "email": str,
@@ -48,7 +49,8 @@
 
 * Response: User account gets created
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     "message": str
   }
   ```
@@ -182,7 +184,8 @@
 
 * Response: A specified trip gets deleted
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     true,
     "message": str,
   }
@@ -210,7 +213,8 @@
 
 * Response: Updated trip info
 * Response shape (JSON):
-  ```json {
+  ```json 
+  {
     "trip_name": str,
     "start_date": date,
     "end_date": date,
