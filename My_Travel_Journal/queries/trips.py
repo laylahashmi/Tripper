@@ -42,9 +42,10 @@ class TripQueries(Queries):
         trips = []
         all_trips = self.collection.find({'user_id': user_id})
         for trip in all_trips:
+            if 'stops' in trip:
+                for stop in trip['stops']:
+                    stop['id'] = str(stop['_id'])
             trip['id'] = str(trip['_id'])
-            for stop in trip['stops']:
-                stop['id'] = str(stop['_id'])
             trips.append(TripOut(**trip))
         return trips
         
@@ -54,6 +55,9 @@ class TripQueries(Queries):
         if trip is None:
             return None
         trip['id'] = str(trip['_id'])
+        if 'stops' in trip:
+            for stop in trip['stops']:
+                stop['id'] = str(stop['_id'])
         return TripOut(**trip)
 
     def delete_trip(self, trip_id: str, user_id: str) -> bool:
@@ -76,19 +80,37 @@ class TripQueries(Queries):
         return StopOut(**stop)
 
     def get_stop(self, trip_id: str, stop_id: str, user_id: str) -> StopOut:
-        stop = self.collection.find_one({'_id': ObjectId(trip_id), 'user_id': user_id})
-        if stop is None:
+        trip = self.collection.find_one(
+            {'_id': ObjectId(trip_id), 'user_id': user_id}, {'stops': {'$elemMatch': {'_id': ObjectId(stop_id)}}}
+            )
+        if not trip or not trip['stops']:
             return None
+        stop = trip['stops'][0]
         stop['id'] = str(stop['_id'])
         return StopOut(**stop)
 
     def update_stop(self, info: StopIn, trip_id: str, stop_id: str, user_id: str) -> TripOut| None:
-        trip = self.collection.find_one({'_id': ObjectId(trip_id), 'user_id': user_id})
-        for stop in trip['stops']:
-            stop['id'] = str(stop['_id'])
-            if stop['id'] == ObjectId(stop_id):
-                self.collection.update_one({'id': ObjectId(stop_id)}, {'$set': { trip['stops']: info.dict()}})
-        if not trip:
-            return None
-        return self.get_trip(trip_id, user_id)
+        filter_criteria = {"_id": ObjectId(trip_id), "user_id": user_id, "stops._id": ObjectId(stop_id)}
 
+        stop_update_dict = info.dict()
+
+        update_operations = {}
+
+        for key, value in stop_update_dict.items():
+            update_operations[f"stops.$.{key}"] = value
+
+        result = self.collection.update_one(filter_criteria, {"$set": update_operations})
+
+        if not result.matched_count:
+            return None
+
+        updated_stop = self.get_stop(trip_id, stop_id, user_id)
+
+        return updated_stop
+
+    def delete_stop(self, trip_id: str, stop_id: str, user_id: str) -> bool:
+        result = self.collection.update_one(
+            {"_id": ObjectId(trip_id), "user_id": user_id},
+            {"$pull": {"stops": {"_id": ObjectId(stop_id)}}},
+        )
+        return bool(result.modified_count)

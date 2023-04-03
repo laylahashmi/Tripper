@@ -65,7 +65,7 @@ async def create_stop(
     stop = repo.create_stop(info, trip_id, user_id)
     return stop
 
-@router.get('/{trip_id}/stops/{stop_id}')
+@router.get('/{trip_id}/stops/{stop_id}', response_model=StopOut)
 async def get_stop(
     trip_id: str,
     stop_id: str,
@@ -73,8 +73,11 @@ async def get_stop(
     repo: TripQueries = Depends()
 ):
     stop = repo.get_stop(trip_id, stop_id, user_id)
+    if not stop:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Stop not found")
+    return stop
 
-@router.put('/{trip_id}/stops/{stop_id}', response_model=TripOut | None)
+@router.put('/{trip_id}/stops/{stop_id}', response_model=StopOut | None)
 async def update_stop(
     info: StopIn,
     trip_id: str,
@@ -83,3 +86,12 @@ async def update_stop(
     repo: TripQueries = Depends()
 ): 
     return repo.update_stop(info, trip_id, stop_id, user_id)
+
+@router.delete('/{trip_id}/stops/{stop_id}', response_model= bool)
+async def delete_stop(
+    trip_id: str,
+    stop_id: str,
+    user_id: dict = Depends(authenticator.get_current_account_data),
+    repo: TripQueries = Depends()
+):
+    return repo.delete_stop(trip_id, stop_id, user_id)
