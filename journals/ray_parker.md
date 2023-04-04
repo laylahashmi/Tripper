@@ -24,3 +24,6 @@ We collaborated on our endpoints for trips and walked through the code as a team
 
 ## March 30th, 2023:
 Working on our back end has brought up a few blockers especially with incorporating our stops. The biggest blocker was grabbing and viewing an id for a stop. We started using VScode live share to code together and that has been helpful. All we need to do is wrap up our back end to get a stop and update a stop which we'll continue on Monday. For this weekend we discussed reviewing the FastAPI videos to gain a better understanding of our code before moving into the front end.
+
+## April 3rd, 2023:
+We finished the back-end of our project. Going over our CRUD we found and fixed a couple of bugs. We added update stops and delete a stop. Everything is working and we are on track this week.
