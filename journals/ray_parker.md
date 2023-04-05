@@ -27,3 +27,9 @@ Working on our back end has brought up a few blockers especially with incorporat
 
 ## April 3rd, 2023:
 We finished the back-end of our project. Going over our CRUD we found and fixed a couple of bugs. We added update stops and delete a stop. Everything is working and we are on track this week.
+
+## April 4th, 2023:
+I pulled the finished back-end we worked on together. I got my Fast API swagger and Mongo Compass set up. I tested all of the CRUD we built and left one trip with three stops in my database.
+
+## April 5th, 2023:
+Today we're researching React Redux by reading the explorations, and watching videos on it. We talked about setting up our project with redux by the end of the week.
