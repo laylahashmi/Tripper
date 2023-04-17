@@ -27,6 +27,9 @@ class TripOut(TripIn):
     id: str
     stops: List[StopOut]| None
 
+class AllTripsOut(BaseModel):
+    trips: List[TripOut]
+
 class TripQueries(Queries):
 
     COLLECTION = "trips"
@@ -38,8 +41,9 @@ class TripQueries(Queries):
         trip['id'] = str(trip['_id'])
         return TripOut(**trip)
 
-    def get_all_trips(self, user_id: str) -> List[TripOut]:
+    def get_all_trips(self, user_id: str) -> AllTripsOut:
         trips = []
+        trips_dict = {'trips': trips}
         all_trips = self.collection.find({'user_id': user_id})
         for trip in all_trips:
             if 'stops' in trip:
@@ -47,7 +51,7 @@ class TripQueries(Queries):
                     stop['id'] = str(stop['_id'])
             trip['id'] = str(trip['_id'])
             trips.append(TripOut(**trip))
-        return trips
+        return trips_dict
         
     
     def get_trip(self, trip_id: str, user_id: str) -> TripOut:

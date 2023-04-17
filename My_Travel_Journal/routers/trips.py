@@ -1,5 +1,5 @@
 from fastapi import Depends, APIRouter, HTTPException, status
-from queries.trips import TripIn, TripOut, TripQueries, StopIn, StopOut
+from queries.trips import AllTripsOut, TripIn, TripOut, TripQueries, StopIn, StopOut
 from authenticator import authenticator
 from typing import List
 
@@ -14,7 +14,7 @@ async def create_trip(
 ):
     return repo.create(info, user_id)
 
-@router.get("/", response_model=List[TripOut])
+@router.get("/", response_model=AllTripsOut)
 async def get_all_trips(
     user_id: dict = Depends(authenticator.get_current_account_data),
     repo: TripQueries = Depends()
