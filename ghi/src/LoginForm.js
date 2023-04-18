@@ -7,14 +7,14 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
   const [
-      loginPost,
+      login,
       { data: post, isLoading },
     ] = useLoginMutation();
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginPost({username, password});
+    login({username, password});
     e.target.reset();
     navigate('/trips')
   };
