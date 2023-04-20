@@ -1,7 +1,12 @@
 import { useGetTripsQuery } from "./store/tripsApi";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDeleteTripMutation } from "./store/tripsApi";
 
 function TripsList() {
+
+    const [ deleteTrip, result ] = useDeleteTripMutation()
+
     const {data, error, isLoading} = useGetTripsQuery();
 
     if (isLoading) {
@@ -26,10 +31,11 @@ function TripsList() {
                     <tbody>
                         {data.trips.map(trip => (
                             <tr key={trip.id}>
-                                <td>{trip.name}</td>
+                                <td><Link to={`/trips/${trip.id}`}>{trip.name}</Link></td>
                                 <td>{trip.start_date}</td>
                                 <td>{trip.end_date}</td>
                                 <td>{trip.description}</td>
+                                <td><button onClick={() => deleteTrip(trip.id)}>Delete</button></td>
                             </tr>
                         ))}
                     </tbody>

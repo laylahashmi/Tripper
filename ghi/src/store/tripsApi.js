@@ -6,7 +6,7 @@ export const tripsApi = createApi({
         baseUrl: process.env.REACT_APP_API_HOST,
         credentials: 'include'
     }),
-    tagTypes: ['Trips'],
+    tagTypes: ['Trips', 'Trip'],
     endpoints: builder => ({
         getTrips: builder.query({
             query: () => '/api/trips/',
@@ -27,16 +27,25 @@ export const tripsApi = createApi({
             invalidatesTags:['Trips']
         }),
         getTrip: builder.query({
-            query: (id) => `/api/trips/${id}`,
-            providesTags:['Trips']
+            query: (id) => ({
+                url: `/api/trips/${id}`,
+            }),
+        
+            providesTags: (id) => [{ type: 'Trip', id: id }]
         }),
         updateTrip: builder.mutation({
-            query: (data, id) => ({
+            query: ({body, id}) => ({
                 url: `/api/trips/${id}`,
                 method: 'PUT',
-                body: data,
+                body: {
+                    picture_url: body.pic,
+                    start_date: body.start,
+                    end_date: body.end,
+                    name: body.name,
+                    description: body.description,
+                },
             }),
-            invalidatesTags:['Trips']
+            invalidatesTags:(id) => [{type: 'Trip', id: id}]
         }),
         createStop: builder.mutation({
             query: (data, id) => ({
@@ -44,18 +53,18 @@ export const tripsApi = createApi({
                 body: data,
                 method: 'POST',
             }),
-            invalidatesTags:['Trips']
+            invalidatesTags:(id) => [{type: 'Trip', id: id}]
         }),
         deleteTrip: builder.mutation({
             query: (id) => ({
                 url: `api/trips/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags:['Trips']
+            invalidatesTags:(id) => [{type: 'Trips'}]
         }),
         getStop: builder.query({
             query: (tripId, stopId) => `/api/trips/${tripId}/stops/${stopId}`,
-            providesTags:['Trips']
+            providesTags:['Trip']
         }),
         updateStop: builder.mutation({
             query: (data, tripId, stopId) => ({
@@ -63,14 +72,14 @@ export const tripsApi = createApi({
                 body: data,
                 method: 'PUT',
             }),
-            invalidatesTags:['Trips']
+            invalidatesTags:(tripId, stopId) => [{type: 'Trip', id: tripId, id: stopId}]
         }),
         deleteStop: builder.mutation({
             query: (tripId, stopId) => ({
                 url: `/api/trips/${tripId}/stops/${stopId}`,
                 method: 'DELETE'
             }),
-            invalidatesTags:['Trips']
+            invalidatesTags:(tripId, stopId) => [{type: 'Trip', id: tripId, id: stopId}]
         })
     }),
 });

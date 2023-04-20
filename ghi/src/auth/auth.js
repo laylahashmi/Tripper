@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    tagTypes: ['Token'],
+    tagTypes: ['Account'],
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_API_HOST,
     }),
@@ -19,7 +19,6 @@ export const authApi = createApi({
                 }
                 return {
                     url: '/token',
-                    
                     method: 'POST',
                     body: formData,
                     credentials: 'include'
@@ -29,15 +28,39 @@ export const authApi = createApi({
                 return (result && ['Account']) || [];
             },
         }),
+        logout: builder.mutation({
+            query: () => ({
+                url: '/token',
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Account', 'Trips']
+        }),
+        signup: builder.mutation ({
+            query: (data) => ({
+                url: '/api/accounts',
+                method: 'POST',
+                body: {
+                    first_name: data.firstName,
+                    last_name: data.lastName,
+                    ...data
+                }
+            }),
+            invalidatesTags: ['Account']
+        }),
         getToken: builder.query({
             query: () => ({
                 url: '/token',
 
                 credentials: 'include',
             }),
-            providesTags: ['Token'],
+            providesTags: ['Account'],
         }),
     }),
 });
 
-export const { useLoginMutation, useGetTokenQuery } = authApi;
+export const {
+    useLoginMutation,
+    useGetTokenQuery,
+    useLogoutMutation,
+    useSignupMutation
+} = authApi;

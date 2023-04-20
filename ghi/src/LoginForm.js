@@ -8,15 +8,24 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const [
       login,
-      { data: post, isLoading },
+      { data: post, isLoading, result },
     ] = useLoginMutation();
 
+  if (isLoading) {
+        return (
+            <progress className="progress is-primary" max='100'></progress>
+        );
+    }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({username, password});
+    try {
+    await login({username, password});
     e.target.reset();
-    navigate('/trips')
+    navigate('/trips');
+    } catch (error) {
+      console.error("login error: ", error);
+    }
   };
 
   return (
