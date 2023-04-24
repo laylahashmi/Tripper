@@ -25,6 +25,7 @@ function ShowTrip() {
     return (
         <>
         <h1>Show Trip</h1>
+        <h2><Link to={`/trips/${id}/stops/create`}>Add a Stop</Link></h2>
         <button onClick={handleUpdate}>Update</button>
         <table>
             <thead>

@@ -48,9 +48,15 @@ export const tripsApi = createApi({
             invalidatesTags:(id) => [{type: 'Trip', id: id}]
         }),
         createStop: builder.mutation({
-            query: (data, id) => ({
+            query: ({body, id}) => ({
                 url: `/api/trips/${id}`,
-                body: data,
+                body: {
+                    name: body.name,
+                    street: body.street,
+                    state: body.state,
+                    city: body.city,
+                    description: body.description,
+                },
                 method: 'POST',
             }),
             invalidatesTags:(id) => [{type: 'Trip', id: id}]

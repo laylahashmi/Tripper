@@ -8,6 +8,7 @@ import TripForm from './TripForm';
 import Signup from './SignupForm';
 import ShowTrip from './ShowTrip';
 import UpdateTrip from './UpdateTrip';
+import CreateStop from './StopForm';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
               <Route path='/login' element={<LoginForm/>} />
               <Route path='/trips/create' element={<TripForm/>} />
               <Route path='/trips/:id/update' element={<UpdateTrip/>} />
+              <Route path='/trips/:id/stops/create' element={<CreateStop/>} />
           </Routes>
         </div>
       </BrowserRouter>
