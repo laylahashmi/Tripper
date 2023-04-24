@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ErrorNotification from './ErrorNotification';
@@ -9,6 +10,7 @@ import Signup from './SignupForm';
 import ShowTrip from './ShowTrip';
 import UpdateTrip from './UpdateTrip';
 import CreateStop from './StopForm';
+import ShowStop from './ShowStop';
 
 function App() {
 
@@ -23,6 +25,7 @@ function App() {
               <Route path='/trips/create' element={<TripForm/>} />
               <Route path='/trips/:id/update' element={<UpdateTrip/>} />
               <Route path='/trips/:id/stops/create' element={<CreateStop/>} />
+              <Route path='/trips/:trip_id/stops/:stop_id' element={<ShowStop/>} />
           </Routes>
         </div>
       </BrowserRouter>

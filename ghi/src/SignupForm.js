@@ -41,6 +41,7 @@ const Signup = () => {
             password,
         })
         dispatch(reset())
+        navigate(`/trips`)
     }
     return (
         <div className="card">
