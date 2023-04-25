@@ -1,0 +1,80 @@
+/* LoginForm.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
+
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("login.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tripper-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem; /* Adjust the margin-bottom value */
+  color: #FFFFFF;
+}
+
+.login-form-card {
+  font-family: "Poppins", sans-serif;
+  width: 400px;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-form-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.form-control {
+  border: none;
+  border-radius: 0.5rem;
+  background-color:transparent;
+}
+
+.elegant-btn {
+  background-color: black;
+  border-color: #FFFFFF;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.elegant-btn:hover {
+  background-color: white;
+  border-color: #FFFFFF;
+  color: #fff;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #FFFFFF;
+}
+
+.btn-primary:disabled:hover {
+  background-color: black;
+  border-color: #FFFFFF;
+  opacity: 0.65;
+  pointer-events: none;
+}

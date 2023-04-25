@@ -8,22 +8,25 @@ import TripForm from './TripForm';
 import Signup from './SignupForm';
 import ShowTrip from './ShowTrip';
 import UpdateTrip from './UpdateTrip';
+import MainPage from "./MainPage";
+import About from "./about";
 
 function App() {
-
   return (
-      <BrowserRouter>
-        <div>
-          <Routes>
-              <Route path='/trips' element={<TripsList />} />
-              <Route path='/trips/:id' element={<ShowTrip />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='/login' element={<LoginForm/>} />
-              <Route path='/trips/create' element={<TripForm/>} />
-              <Route path='/trips/:id/update' element={<UpdateTrip/>} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/trips" element={<TripsList />} />
+          <Route path="/trips/:id" element={<ShowTrip />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/trips/create" element={<TripForm />} />
+          <Route path="/trips/:id/update" element={<UpdateTrip />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

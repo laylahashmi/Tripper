@@ -1,33 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateTripMutation } from "./store/tripsApi";
+import Image from "./TripperLogo.svg"; // Import the TripperLogo.svg
+import "./Loginform.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function TripForm() {
-    const navigate = useNavigate();
-    const [name, setName] = useState('');
-    const [pic, setPic] = useState('');
-    const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
-    const [description, setDescription] = useState('');
-    const [createTrip, result] = useCreateTripMutation();
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [pic, setPic] = useState('');
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+  const [description, setDescription] = useState('');
+  const [createTrip, result] = useCreateTripMutation();
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        createTrip({name, pic, start, end, description})
-    };
-
-    if (result.isSuccess) {
-        navigate('/trips')
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      await createTrip({ name, pic, start, end, description });
+    } catch (error) {
+      console.log(error);
     }
+};
 
-    return (
+  if (result.isSuccess) {
+    navigate('/trips');
+  }
+
+  return (
     <>
-      <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1>Add a new trip!</h1>
+      <div className="login-form-container">
+        <div className="card login-form-card">
+          <img src={Image} alt="Tripper Logo" className="tripper-logo" />
+          <div className="card-body">
+            {/* <h1 className="login-form-title">Add Trip</h1> */}
             <form id="create-trip-form" onSubmit={handleSubmit}>
-              <div className="form-floating mb-3">
+              <div className="mb-3">
+                <label htmlFor="name">Name</label>
                 <input
                   required
                   className="form-control"
@@ -37,9 +47,9 @@ function TripForm() {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 />
-                <label htmlFor="name">Name</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="mb-3">
+                <label htmlFor="pic">Picture</label>
                 <input
                   required
                   className="form-control"
@@ -49,9 +59,9 @@ function TripForm() {
                   onChange={(e) => setPic(e.target.value)}
                   value={pic}
                 />
-                <label htmlFor="pic">Picture</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="mb-3">
+                <label htmlFor="start">Start Date</label>
                 <input
                   required
                   className="form-control"
@@ -61,9 +71,9 @@ function TripForm() {
                   onChange={(e) => setStart(e.target.value)}
                   value={start}
                 />
-                <label htmlFor="start">Start Date</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="mb-3">
+                <label htmlFor="end">End Date</label>
                 <input
                   required
                   className="form-control"
@@ -73,9 +83,9 @@ function TripForm() {
                   onChange={(e) => setEnd(e.target.value)}
                   value={end}
                 />
-                <label htmlFor="end">End Date</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="mb-3">
+                <label htmlFor="description">Description</label>
                 <input
                   required
                   className="form-control"
@@ -85,15 +95,16 @@ function TripForm() {
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                 />
-                <label htmlFor="description">Description</label>
               </div>
-              <button className="btn btn-primary">Create</button>
+              <div className="d-grid">
+                <button type="submit" className="btn btn-primary elegant-btn bg-navy-blue">Create</button>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default TripForm;

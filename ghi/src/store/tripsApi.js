@@ -30,7 +30,7 @@ export const tripsApi = createApi({
             query: (id) => ({
                 url: `/api/trips/${id}`,
             }),
-        
+
             providesTags: (id) => [{ type: 'Trip', id: id }]
         }),
         updateTrip: builder.mutation({
