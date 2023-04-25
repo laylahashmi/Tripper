@@ -41,7 +41,6 @@ function ShowStop() {
     }
     
     if (stop) {
-        // console.log('stop', stop)
         return (
             <>
                 <Card className= 'mb-3 shadow mr-3 ml-3 mx-auto'key={stop.id}>

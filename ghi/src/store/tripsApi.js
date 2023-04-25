@@ -12,6 +12,11 @@ export const tripsApi = createApi({
             query: () => '/api/trips/',
             providesTags:['Trips']
         }),
+        getImageByCity: builder.query({
+            query:({city}) => ({
+                url: `api/pexels/${city}`
+            }),
+        }),
         createTrip: builder.mutation({
             query: (data) => ({
                 url: '/api/trips/',
@@ -100,4 +105,5 @@ export const {
     useGetStopQuery,
     useUpdateStopMutation,
     useDeleteStopMutation,
+    useGetImageByCityQuery,
 } = tripsApi;

@@ -3,18 +3,20 @@ import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
+import { useGetImageByCityQuery } from "./store/tripsApi";
+import { useState } from "react";
 
 
 
 function ShowTrip() {
     const navigate = useNavigate()
+    const { id } = useParams();
+    const { data: trip, error, isLoading } = useGetTripQuery(id)
+    
 
     async function handleUpdate() {
         navigate(`/trips/${trip.id}/update`)
     }
-
-    const { id } = useParams();
-    const { data: trip, error, isLoading } = useGetTripQuery(id)
 
     if (isLoading) {
         return (

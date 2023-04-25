@@ -25,6 +25,7 @@ services:
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
       MONGO_URL: mongodb://admin:password@mongo
+      PEXELS_API_KEY: ${PEXELS_API_KEY}
       
   ghi:
     image: node:lts-bullseye

@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from queries.client import Queries
 from typing import Optional, List
 from bson import ObjectId
+from queries.pexels import ImageQueries
 
 class StopIn(BaseModel):
     name: str
@@ -12,6 +13,7 @@ class StopIn(BaseModel):
 
 class StopOut(StopIn):
     id: str
+    picture_url: str | None
 
 class TripIn(BaseModel):
     name: str
