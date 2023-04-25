@@ -55,7 +55,7 @@ function ShowTrip() {
                 <Card className= 'mb-3 shadow mr-3 ml-3'key={stop.id}>
                     <Card.Img variant="top" src="https://tinyurl.com/2z4pddmp" />
                     <Card.Body>
-                    <Card.Title>{stop.name}</Card.Title>
+                    <Card.Title><Link to={`/trips/${trip.id}/stops/${stop.id}`}>{stop.name}</Link></Card.Title>
                     <Card.Text>
                         {stop.description}
                     </Card.Text>
