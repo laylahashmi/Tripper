@@ -12,6 +12,11 @@ export const tripsApi = createApi({
             query: () => '/api/trips/',
             providesTags:['Trips']
         }),
+        getImageByCity: builder.query({
+            query:({city}) => ({
+                url: `api/pexels/${city}`
+            }),
+        }),
         createTrip: builder.mutation({
             query: (data) => ({
                 url: '/api/trips/',
@@ -48,9 +53,15 @@ export const tripsApi = createApi({
             invalidatesTags:(id) => [{type: 'Trip', id: id}]
         }),
         createStop: builder.mutation({
-            query: (data, id) => ({
+            query: ({body, id}) => ({
                 url: `/api/trips/${id}`,
-                body: data,
+                body: {
+                    name: body.name,
+                    street: body.street,
+                    state: body.state,
+                    city: body.city,
+                    description: body.description,
+                },
                 method: 'POST',
             }),
             invalidatesTags:(id) => [{type: 'Trip', id: id}]
@@ -63,23 +74,23 @@ export const tripsApi = createApi({
             invalidatesTags:(id) => [{type: 'Trips'}]
         }),
         getStop: builder.query({
-            query: (tripId, stopId) => `/api/trips/${tripId}/stops/${stopId}`,
+            query: ({tripId, stopId}) => `/api/trips/${tripId}/stops/${stopId}`,
             providesTags:['Trip']
         }),
         updateStop: builder.mutation({
-            query: (data, tripId, stopId) => ({
+            query: ({body, tripId, stopId}) => ({
                 url: `/api/trips/${tripId}/stops/${stopId}`,
-                body: data,
+                body: body,
                 method: 'PUT',
             }),
             invalidatesTags:(tripId, stopId) => [{type: 'Trip', id: tripId, id: stopId}]
         }),
         deleteStop: builder.mutation({
-            query: (tripId, stopId) => ({
+            query: ({tripId, stopId}) => ({
                 url: `/api/trips/${tripId}/stops/${stopId}`,
                 method: 'DELETE'
             }),
-            invalidatesTags:(tripId, stopId) => [{type: 'Trip', id: tripId, id: stopId}]
+            invalidatesTags:() => [{type: 'Trip'}]
         })
     }),
 });
@@ -94,4 +105,5 @@ export const {
     useGetStopQuery,
     useUpdateStopMutation,
     useDeleteStopMutation,
+    useGetImageByCityQuery,
 } = tripsApi;

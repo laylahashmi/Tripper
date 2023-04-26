@@ -12,3 +12,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.card {
+  width: 400px;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
