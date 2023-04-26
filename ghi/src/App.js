@@ -11,14 +11,13 @@ import MainPage from "./MainPage";
 import About from "./about";
 import CreateStop from './StopForm';
 import ShowStop from './ShowStop';
-import MainPage from './HomePage';
+
 
 function App() {
   return (
     <BrowserRouter>
       <div>
         <Routes>
-              <Route path='' element={<MainPage />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/trips" element={<TripsList />} />

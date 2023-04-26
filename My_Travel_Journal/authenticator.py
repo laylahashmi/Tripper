@@ -32,5 +32,4 @@ class MyAuthenticator(Authenticator):
         # You must return TWO values from this method.
         return account.username, AccountOut(**account.dict())
 
-
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
