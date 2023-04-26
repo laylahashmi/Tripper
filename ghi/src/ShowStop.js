@@ -44,7 +44,7 @@ function ShowStop() {
         return (
             <>
                 <Card className= 'mb-3 shadow mr-3 ml-3 mx-auto'key={stop.id}>
-                    <Card.Img variant="top" src="https://tinyurl.com/2z4pddmp" />
+                    <Card.Img variant="top" src={stop.picture_url} />
                     <Card.Body>
                     <Card.Title>{stop.name}</Card.Title>
                     <Card.Text>

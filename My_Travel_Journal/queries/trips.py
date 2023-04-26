@@ -76,11 +76,15 @@ class TripQueries(Queries):
             return None
         return self.get_trip(trip_id, user_id)
 
-    def create_stop(self, info: StopIn, trip_id: str, user_id: str) -> StopOut:
+    def create_stop(self, info: StopIn, trip_id: str, user_id: str, photo) -> StopOut:
+        print(photo)
         stop = info.dict()
         stop['_id'] = ObjectId()
+        picture = photo['photos'][0]['src']['original']
+        stop['picture_url'] = str(picture)
         trip = self.collection.update_one({'user_id': user_id, '_id': ObjectId(trip_id)}, {'$push':{'stops': stop}},)
         stop['id'] = str(stop['_id'])
+        print(stop['picture_url'])
         if not trip:
             return None
         return StopOut(**stop)

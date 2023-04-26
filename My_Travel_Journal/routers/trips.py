@@ -2,6 +2,7 @@ from fastapi import Depends, APIRouter, HTTPException, status
 from queries.trips import AllTripsOut, TripIn, TripOut, TripQueries, StopIn, StopOut
 from authenticator import authenticator
 from typing import List
+from queries.pexels import ImageQueries
 
 
 router = APIRouter(prefix="/api/trips")
@@ -60,9 +61,11 @@ async def create_stop(
     info: StopIn,
     trip_id: str,
     user_id: dict = Depends(authenticator.get_current_account_data),
-    repo: TripQueries = Depends()
+    repo: TripQueries = Depends(),
+    image: ImageQueries = Depends(),
 ):
-    stop = repo.create_stop(info, trip_id, user_id)
+    photo = image.get_image_by_city(info.city)
+    stop = repo.create_stop(info, trip_id, user_id, photo)
     return stop
 
 @router.get('/{trip_id}/stops/{stop_id}', response_model=StopOut)
