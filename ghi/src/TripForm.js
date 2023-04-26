@@ -34,7 +34,6 @@ function TripForm() {
         <div className="card login-form-card">
           <img src={Image} alt="Tripper Logo" className="tripper-logo" />
           <div className="card-body">
-            {/* <h1 className="login-form-title">Add Trip</h1> */}
             <form id="create-trip-form" onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="name">Name</label>
