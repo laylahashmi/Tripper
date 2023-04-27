@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-import bgImage from "./logo.svg";
+import bgImage from "./Backgrounds/logo.svg";
 
 
 function MainPage() {

@@ -1,16 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import TripsList from './TripsList.js';
-import LoginForm from './LoginForm';
-import TripForm from './TripForm';
-import Signup from './SignupForm';
-import ShowTrip from './ShowTrip';
-import UpdateTrip from './UpdateTrip';
+import TripsList from './TripForms/TripsList.js';
+import LoginForm from './Login/LoginForm';
+import TripForm from './TripForms/TripForm';
+import Signup from './Signup/SignupForm';
+import ShowTrip from './TripForms/ShowTrip';
+import UpdateTrip from './TripForms/UpdateTrip';
 import MainPage from "./MainPage";
 import About from "./about";
-import CreateStop from './StopForm';
-import ShowStop from './ShowStop';
+import CreateStop from './StopForms/StopForm';
+import ShowStop from './StopForms/ShowStop';
 
 
 function App() {

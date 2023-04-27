@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Image from "./TripperLogo.svg";
+import Image from "../Backgrounds/TripperLogo.svg";
 import {
   handleFirstNameChange,
   handleLastNameChange,
@@ -11,8 +11,9 @@ import {
   reset,
   error,
 } from "./SignupSlice";
-import { useSignupMutation } from "./auth/auth";
+import { useSignupMutation } from "../auth/auth";
 import { useSpring, animated } from "react-spring";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [signup, result] = useSignupMutation();
@@ -59,10 +60,17 @@ const Signup = () => {
     };
 
     if (result.isSuccess) {
-    navigate("/trips/login");
+    navigate("/trips");
     }
 
   return (
+    <>
+    <div className="position-absolute top-0 end-0 mt-4 me-4">
+      <Link to="/" className="btn btn-lg btn-outline-light me-3">
+        Home
+      </Link>
+    </div>
+    <div></div>
         <animated.div className="login-form-container" style={fadeIn}>
         <div className="card login-form-card">
             <animated.img
@@ -172,6 +180,7 @@ const Signup = () => {
             </div>
         </div>
         </animated.div>
+        </>
     );
     };
 

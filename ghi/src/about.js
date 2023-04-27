@@ -1,9 +1,8 @@
 import React from "react";
-import bgImage from "./logo.svg";
-import Image from "./TripperLogo.svg";
+import bgImage from "./Backgrounds/Tripslist.svg";
 import { useSpring, animated } from "react-spring";
 import { Link } from "react-router-dom";
-import "./about.css";
+
 
 function About() {
   const bgStyle = {
@@ -25,18 +24,6 @@ function About() {
 
   return (
     <>
-      <animated.img
-        src={Image}
-        alt="Tripper Logo"
-        style={{
-          position: "absolute",
-          top: "80px",
-          left: "80px",
-          zIndex: 10,
-          ...logoAnimation,
-        }}
-      />
-
       <div style={bgStyle}>
         <div className="container text-center">
           <h2 className="display-3 text-white mb-5">About Tripper</h2>
@@ -46,6 +33,12 @@ function About() {
             share your trips with friends and family. With Tripper, you can
             discover new destinations, create personalized itineraries, and
             track your travel memories all in one place.
+          </p>
+          <p className="lead text-white mb-5">
+            Our Mission At Tripper, our mission is to revolutionize the way people travel by providing
+            a comprehensive and user-friendly platform that simplifies the journey from inspiration to destination.
+            We are dedicated to empowering travelers by offering personalized experiences, fostering connections with fellow explorers, and promoting responsible tourism.
+            Our commitment to innovation and passion for exploration drives us to continuously enhance our platform, ensuring that Tripper remains the ultimate travel companion for every adventure.
           </p>
           <div className="position-absolute top-0 end-0 mt-4 me-4">
             <Link to="/login" className="btn btn-lg btn-outline-light me-3">

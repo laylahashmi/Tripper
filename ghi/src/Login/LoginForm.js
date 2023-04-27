@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useLoginMutation, useGetTokenQuery } from "./auth/auth";
+import { useLoginMutation, useGetTokenQuery } from "../auth/auth";
 import { useNavigate } from "react-router-dom";
 import { useSpring, animated } from "react-spring"; // Import useSpring and animated
-import Image from "./TripperLogo.svg";
-import "./Loginform.css";
+import Image from "../Backgrounds/TripperLogo.svg";
+import "../Loginform.css";
 
 
 const LoginForm = () => {
@@ -25,7 +25,7 @@ const LoginForm = () => {
     delay: 300,
     config: { duration: 1000 },
   });
-  
+
   if (isLoading) {
     return <progress className="progress is-primary" max="100"></progress>;
   }

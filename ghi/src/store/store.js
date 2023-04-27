@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { tripsApi } from './tripsApi'
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '../auth/auth';
-import SignupReducer, { signupReducer } from '../SignupSlice';
+import SignupReducer, { signupReducer } from '../Signup/SignupSlice';
 
 export const store= configureStore({
     reducer: {
@@ -10,7 +10,7 @@ export const store= configureStore({
         [tripsApi.reducerPath]: tripsApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => 
+    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([tripsApi.middleware, authApi.middleware]),
 });
 
