@@ -1,37 +1,36 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import TripsList from './TripForms/TripsList.js';
+import LoginForm from './Login/LoginForm';
+import TripForm from './TripForms/TripForm';
+import Signup from './Signup/SignupForm';
+import ShowTrip from './TripForms/ShowTrip';
+import UpdateTrip from './TripForms/UpdateTrip';
+import MainPage from "./MainPage";
+import About from "./about";
+import CreateStop from './StopForms/StopForm';
+import ShowStop from './StopForms/ShowStop';
+
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);  
-
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log('fastapi url: ', url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, [])
-
-
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/trips" element={<TripsList />} />
+          <Route path="/trips/:id" element={<ShowTrip />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/trips/create" element={<TripForm />} />
+          <Route path="/trips/:id/update" element={<UpdateTrip />} />
+              <Route path='/trips/:id/stops/create' element={<CreateStop/>} />
+              <Route path='/trips/:tripId/stops/:stopId' element={<ShowStop/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

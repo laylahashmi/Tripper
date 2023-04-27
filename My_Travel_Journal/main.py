@@ -2,12 +2,13 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
-from routers import accounts, trips
+from routers import accounts, trips, pexels
 
 app = FastAPI()
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(trips.router)
+app.include_router(pexels.router)
 
 
 app.add_middleware(
