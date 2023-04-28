@@ -24,16 +24,15 @@ export const authApi = createApi({
                     credentials: 'include'
                 };
             },
-            invalidatesTags: result => {
-                return (result && ['Account']) || [];
-            },
+            // invalidatesTags: ['Account']
         }),
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include'
             }),
-            invalidatesTags: ['Account', 'Trips']
+            // invalidatesTags: ['Account', 'Trips']
         }),
         signup: builder.mutation ({
             query: (data) => ({
@@ -45,7 +44,7 @@ export const authApi = createApi({
                     ...data
                 }
             }),
-            invalidatesTags: ['Account']
+            // providesTags: ['Account']
         }),
         getToken: builder.query({
             query: () => ({
@@ -53,7 +52,7 @@ export const authApi = createApi({
 
                 credentials: 'include',
             }),
-            providesTags: ['Account'],
+            // providesTags: ['Account'],
         }),
     }),
 });

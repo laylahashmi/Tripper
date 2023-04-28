@@ -5,29 +5,36 @@ import { useDeleteTripMutation } from "../store/tripsApi";
 import Carousel from "react-bootstrap/Carousel";
 import "../App.css";
 import backgroundImage from '../Backgrounds/Tripslist.svg';
+import { useLogoutMutation } from "../auth/auth";
+import { useNavigate } from "react-router-dom";
+import { useGetTokenQuery } from "../auth/auth";
 
 
 function TripsList() {
+  const { data, error, isLoading } = useGetTripsQuery();
   const [deleteTrip, result] = useDeleteTripMutation();
   const [user, setUser] = useState(null);
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const { data: token, isLoading: tokenLoad } = useGetTokenQuery();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/account`, {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  const { data, error, isLoading } = useGetTripsQuery();
+  if (!token && !tokenLoad) {
+    navigate('/');
+    console.error( 'please sign in to view trips.', error)
+  }
+  
+  function handleLogout() {
+    try {
+      logout();
+      navigate ('/');
+    } catch (error) {
+      console.error( 'logout failed:', error);
+      
+    }
+    }
 
   if (isLoading) {
+    console.log(token)
     return <progress className="progress is-primary" max="100"></progress>;
   }
 
@@ -35,26 +42,26 @@ function TripsList() {
 return (
   <>
     <div className="position-absolute top-0 end-0 mt-4 me-4">
-      <Link to="/" className="btn btn-lg btn-outline-light me-3">
+      <Link to="/trips" className="btn btn-lg btn-outline-light me-3">
         Home
       </Link>
       <Link to="/trips/create" className="btn btn-lg btn-outline-light me-3">
         Add Trip
       </Link>
-      <Link to="/" className="btn btn-lg btn-outline-light">
+      <button onClick={handleLogout} className="btn btn-lg btn-outline-light">
         Signout
-      </Link>
+      </button>
     </div>
-    <div
-      style={{
-  backgroundImage: `url(${backgroundImage})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  minHeight: '105vh',
+        <div
+          style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      minHeight: '105vh',
 }}
     >
-   {user && (
+   {token && (
         <section className="h-100 gradient-custom-2">
     <div className="container h-100">
       <div className="row h-100">
@@ -85,9 +92,9 @@ return (
               </div>
               <div className="ms-3" style={{ marginTop: "130px" }}>
                 <h5>
-                  {user.first_name} {user.last_name}
+                  {token.account.first_name} {token.account.last_name}
                 </h5>
-                <p>{user.email}</p>
+                <p>{token.account.email}</p>
               </div>
             </div>
                 <div
