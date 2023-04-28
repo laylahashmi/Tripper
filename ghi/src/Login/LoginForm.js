@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useLoginMutation, useGetTokenQuery } from "../auth/auth";
+import { useLoginMutation } from "../auth/auth";
 import { useNavigate } from "react-router-dom";
-import { useSpring, animated } from "react-spring"; // Import useSpring and animated
+import { useSpring, animated } from "react-spring";
 import Image from "../Backgrounds/TripperLogo.svg";
 import "../Loginform.css";
 
@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [login, { data: post, isLoading, result }] = useLoginMutation();
+  const [login, { data: post, isLoading }] = useLoginMutation();
 
     const fadeIn = useSpring({
     from: { opacity: 0 },

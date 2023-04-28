@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 from queries.client import Queries
 from typing import Optional, List
 from bson import ObjectId
-from queries.pexels import ImageQueries
 
 class StopIn(BaseModel):
     name: str
@@ -21,9 +20,6 @@ class TripIn(BaseModel):
     start_date: str
     end_date: str
     description: str
-   
-    # TODO: add username to the trip on creation so it belongs to a user
-    # TODO: do we add an id here to make attaching a stop easier?
 
 class TripOut(TripIn):
     id: str

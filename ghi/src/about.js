@@ -1,6 +1,5 @@
 import React from "react";
 import bgImage from "./Backgrounds/Tripslist.svg";
-import { useSpring, animated } from "react-spring";
 import { Link } from "react-router-dom";
 
 
@@ -14,13 +13,6 @@ function About() {
     alignItems: "center",
     justifyContent: "center",
   };
-
-  const logoAnimation = useSpring({
-    from: { transform: "translate3d(-50%, -50%, 0) scale(0.5)", opacity: 0 },
-    to: { transform: "translate3d(-50%, -50%, 0) scale(1)", opacity: 1 },
-    delay: 300,
-    config: { duration: 1000 },
-  });
 
   return (
     <>

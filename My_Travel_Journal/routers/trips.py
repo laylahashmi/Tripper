@@ -1,7 +1,6 @@
 from fastapi import Depends, APIRouter, HTTPException, status
 from queries.trips import AllTripsOut, TripIn, TripOut, TripQueries, StopIn, StopOut
 from authenticator import authenticator
-from typing import List
 from queries.pexels import ImageQueries
 
 

@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { tripsApi } from './tripsApi'
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '../auth/auth';
-import SignupReducer, { signupReducer } from '../Signup/SignupSlice';
+import SignupReducer from '../Signup/SignupSlice';
 
 export const store= configureStore({
     reducer: {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateTripMutation } from "../store/tripsApi";
-import Image from "../Backgrounds/TripperLogo.svg"; // Import the TripperLogo.svg
+import Image from "../Backgrounds/TripperLogo.svg";
 import "../Loginform.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,7 +20,7 @@ function TripForm() {
     try {
       await createTrip({ name, pic, start, end, description });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 };
 

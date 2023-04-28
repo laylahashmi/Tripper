@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 from queries.client import Queries
-from authenticator import Authenticator
-
 
 
 class DuplicateAccountError(ValueError):

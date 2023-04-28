@@ -15,7 +15,7 @@ function CreateStop() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
-  const [createStop, result, isLoading] = useCreateStopMutation(id);
+  const [createStop, isLoading] = useCreateStopMutation(id);
 
   const fadeIn = useSpring({
     from: { opacity: 0 },
@@ -54,9 +54,6 @@ function CreateStop() {
    return (
   <>
       <div className="position-absolute top-0 end-0 mt-4 me-4">
-                <Link to="/" className="btn btn-lg btn-outline-light me-3">
-                  Home
-                </Link>
                 <Link to="/trips" className="btn btn-lg btn-outline-light me-3">
                   Trips
                 </Link>

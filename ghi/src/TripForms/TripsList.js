@@ -1,5 +1,5 @@
 import { useGetTripsQuery } from "../store/tripsApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDeleteTripMutation } from "../store/tripsApi";
 import Carousel from "react-bootstrap/Carousel";
@@ -12,8 +12,7 @@ import { useGetTokenQuery } from "../auth/auth";
 
 function TripsList() {
   const { data, error, isLoading } = useGetTripsQuery();
-  const [deleteTrip, result] = useDeleteTripMutation();
-  const [user, setUser] = useState(null);
+  const [deleteTrip] = useDeleteTripMutation();
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const { data: token, isLoading: tokenLoad } = useGetTokenQuery();
@@ -42,9 +41,6 @@ function TripsList() {
 return (
   <>
     <div className="position-absolute top-0 end-0 mt-4 me-4">
-      <Link to="/trips" className="btn btn-lg btn-outline-light me-3">
-        Home
-      </Link>
       <Link to="/trips/create" className="btn btn-lg btn-outline-light me-3">
         Add Trip
       </Link>

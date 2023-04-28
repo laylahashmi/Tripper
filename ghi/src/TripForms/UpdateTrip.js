@@ -19,7 +19,7 @@ function UpdateTrip() {
     const [end, setEnd] = useState('');
     const [description, setDescription] = useState('');
 
-    const [updateTrip, result, isLoading  ] = useUpdateTripMutation(id);
+    const [updateTrip, isLoading  ] = useUpdateTripMutation(id);
 
 
   const fadeIn = useSpring({
@@ -60,9 +60,6 @@ function UpdateTrip() {
 return (
   <>
   <div className="position-absolute top-0 end-0 mt-4 me-4">
-            <Link to="/" className="btn btn-lg btn-outline-light me-3">
-              Home
-            </Link>
             <Link to="/trips" className="btn btn-lg btn-outline-light me-3">
               Trips
             </Link>

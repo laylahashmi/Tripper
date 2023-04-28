@@ -20,9 +20,8 @@
   margin-right: 0.3rem;
   overflow: hidden;
   border-radius: 10px;
-  background-color: #000000; /* Add this to make the card background black */
+  background-color: #000000;
   color: black
-             /* Add this to make the font color white */
 }
 
 .card img {
@@ -31,8 +30,8 @@
   object-fit: cover;
 }
 
-.card-text { /* Add this class to target the text inside the card */
-  color: white; /* Set the text color to white */
+.card-text {
+  color: white;
 }
 
 .profile-card {
@@ -124,7 +123,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed; /* Add this line */
+  position: fixed;
 }
 
 .buttons-container {

@@ -48,7 +48,6 @@ function ShowStop() {
   }
 
   if (isLoading) {
-    console.log(stopId);
     return <progress className="progress is-primary" max="100"></progress>;
   }
 
@@ -56,9 +55,6 @@ function ShowStop() {
    return (
     <>
     <div className="position-absolute top-0 end-0 mt-4 me-4">
-            <Link to="/" className="btn btn-lg btn-outline-light me-3">
-              Home
-            </Link>
             <Link to="/trips" className="btn btn-lg btn-outline-light me-3">
               Trips
             </Link>
