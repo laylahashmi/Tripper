@@ -1,140 +1,218 @@
-# Module3 Project Gamma
+Overview:
+        Tripper is a travel journal designed for the new age nomad.
+        Our team of creators has made a beautiful and intuitive application
+        that allows users to create a history of all their amazing travels
+        including each stop made along the way. Tripper travelers can include
+        their favorite photo as the main display of the trip and let the smart
+        app provide a professional picture for each related stop. All the fun had
+        along the way can be documented in each stop, and an overview of the
+        entire trip will remind our users what they did every time they go to
+        the home page.
 
-## Install Extensions
+API Design:
+        Trips:
+            - **Method**: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+            - **Path**: `/api/trips`, `/api/trips/{trip_id}`, `/api/trips/stops/{stop_id}`
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+            Trip Input:
 
-## Deliverables
+                ```json
+                {
+                    "name": string,
+                    "picture_url": string,
+                    "start_date": string,
+                    "end_date": string,
+                    "description": string,
+                }
+                ```
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+            Trip Output:
 
-## Project layout
+                ```json
+                {
+                    "name": string,
+                    "picture_url": string,
+                    "start_date": string,
+                    "end_date": string,
+                    "description": string,
+                    "id": string,
+                    "stops": [
+                        {
+                        "name": string,
+                        "street": string,
+                        "state": string,
+                        "city": string,
+                        "description": string,
+                        "id": string,
+                        "picture_url": string,
+                        }
+                    ],
+                }
+                ```
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+            Stop Input:
 
-### Directories
+                ```json
+                {
+                    "name": string,
+                    "street": string,
+                    "state": string,
+                    "city": string,
+                    "description": string,
+                }
+                ```
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+            Stop Output:
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+                ```json
+                {
+                    "name": string,
+                    "street": string,
+                    "state": string,
+                    "city": string,
+                    "description": string,
+                    "id": string,
+                    "picture_url": string,
+                }
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+        Creating a new trip will provide a key 'stops' which will contain an empty list. When a stop is added, it will be an object in the list of stops. Picture_url is provided by the pexels API for each stop. Picture_url for a trip will be provided by the user. Ids are created by mongoDB when the trip, stop, or user is created then added to the data. The database attaches the current user's information to every created trip and blocks access to that data from any other user. A user only has access to their own creations.
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+        Accounts:
+            - **Method**: `POST`, `GET`, `DELETE`
+            - **Path**: `api/accounts`, `/token`
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+            Signup Input:
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+                ```json
+                {
+                    "first_name": string,
+                    "last_name": string,
+                    "username": string,
+                    "email": string,
+                    "password": string
+                }
+                ```
+            Signup Output:
 
-### Other files
+                ```json
+                {
+                    "access_token": "string",
+                    "token_type": "Bearer"
+                }
+                ```
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+            Login Input:
 
-* `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
+                ```json
+                {
+                    "username": string,
+                    "password": string
+                }
+                ```
 
-## How to complete the initial deploy
+            Login Output:
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
+                ```json
+                {
+                    "access_token": string,
+                    "token_type": "Bearer"
+                }
+                ```
 
-### Setup GitLab repo/project
+            Logout Input:
 
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
-  Settings -> General -> Advanced -> Remove fork relationship
+                ```json
+                {
+                    "access_token": string
+                }
+                ```
 
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
+            Logout Output:
 
-#### Your GitLab pages URL
+                ```json
+                {
+                    bool
+                }
+                ```
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+        When a user account is created it will automatically be logged in, and an authorization token will be attached to the account in the form of a cookie while the user is logged in.
+        This authorization cookie is necessary to access any part of the application other than the home page and login/signup forms.
 
-If this is your project URL
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
+        Pexels Third Party API:
+            - **Method**: `GET`,
+            - **Path**: `api/pexels{city}`
 
-then your GitLab pages URL will be
+            Input:
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+                ```json
+                {
+                    "photos": [
+                        string
+                        ]
+                }
 
-### Create render.com account and application
+        A GET request is sent to this endpoint every time a new stop is created, then the returned data is filtered through and the correct picture url is pulled off and added into the stop data.
 
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
 
-### Update GitLab CI/CD variables
+Data Models:
+        All data is stored in mongoDB in the same shape as previously listed in the API Design section. There are two collections in the database consisting of 'users' and 'trips'. The 'users' collection stores all account information while the 'trips' collection stores all trip data.
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
 
-### Deploy it
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+Integrations:
+
+        The application will need to get the following kinds of data from third-party sources:
+        Images of cities from Pexels API. The images will be selected based off of the information in the city field of the create stop form.
+
+GHI:
+
+# User Graphical Human Interface
+
+    ## Get Started Page
+
+    This will be the first page visitors arrive to on the website.
+    There will be links to the about, login and signup pages.
+
+    ![Get Started](wireframe/get_started.png)
+
+    ## About Page
+
+    - Contains a brief description of Tripper
+
+    ![About Page](wireframe/about.png)
+
+    ## User Account Pages
+
+    - Login Page
+    - Sign Up Page
+
+    Users with existing accounts can login into their account. If a user wants to create a new account they can do so here.
+
+    ![Login Page](wireframe/login.png)
+    ![Signup Page](wireframe/signup.png)
+
+    ## Home Page
+
+    After a user logs in, they will be redirected to this page. On this page is their account information such as username, first/last name and email. This page also contains all of the trips that a user has created in the form of a carousel.
+
+    ![Home Page](wireframe/home_page.png)
+
+    ## Creating a Trip
+
+    Users can click on the Add a trip button on the homepage to add a new trip. Clicking the create button will add the trip and all of it's relevant info as a carousel to the homepage.
+
+    ![Create Trip](wireframe/create_trip.png)
+
+    ## Trip Details Page
+
+    - Create a stop
+    - Update a trip
+    - Update a stop
+
+    Users can click on a specific trip in the home page to be taken to the trip's details page. From here the user can edit/delete a trip as well as view all the stops on their trip and add/update/delete them if they'd like.
+
+    ![Trip Details](wireframe/trip_details.png)
+    ![Create Stop](wireframe/create_stop.png)
+    ![Update Trip](wireframe/update_trip.png)
+    ![Update Stop](wireframe/update_stop.png)
